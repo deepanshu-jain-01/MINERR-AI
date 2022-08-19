@@ -1,0 +1,2 @@
+cufflinks==0.17.3
+pandas_profiling==3.2.0
