@@ -15,6 +15,8 @@ regression_model = load_model('Saved Models/calculate-mineral.h5')
 st.title('MINERR - AI')
 st.write("DESCRIPTION OF THE APP.........")
 
+min_dict = {12:"Cs"}
+
 df = pd.read_csv("Datasets/Pre-Processed-Data.csv")
 scaler = MinMaxScaler()
 df = scaler.fit_transform(df)
