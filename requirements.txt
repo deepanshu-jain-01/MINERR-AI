@@ -1,2 +1,13 @@
-cufflinks==0.17.3
-pandas_profiling==3.2.0
+streamlit==1.10.0
+
+streamlit-option-menu == 0.3.2
+
+numpy==1.22
+
+scikit-learn==1.1.1
+
+matplotlib==3.5.2
+
+seaborn==0.11.2
+
+tensorflow==2.9.1
