@@ -16,11 +16,6 @@ st.write("DESCRIPTION OF THE APP.........")
 min_dict = {24: 'Fe-Hematite', 13: 'Cu', 1: 'Au', 0: 'Al-Bauxite', 36: 'Pb-Zn', 29: 'Mn', 30: 'Mn-Fe', 10: 'Cr', 27: 'Fe-Ti-V', 9: 'Be-Nb-Ta', 18: 'Cu-Pb', 23: 'Cu-Zn', 26: 'Fe-Magnetite', 40: 'WO3', 38: 'Pb-Zn-Cu', 37: 'Pb-Zn-Ag', 25: 'Fe-Hematite-Mn', 20: 'Cu-Pb-Zn', 6: 'Au-W', 3: 'Au-Cu', 35: 'Pb', 34: 'Nb-Ta-Li-Sn', 5: 'Au-Mo', 19: 'Cu-Pb-Ba', 12: 'Cs', 41: 'Zn', 4: 'Au-Cu-Zn', 21: 'Cu-Pb-Zn-Sb-Py', 8: 'Be', 11: 'Cr-PGE', 39: 'U', 33: 'Nb-Ta', 17: 'Cu-Ni', 32: 'Mo-U-Cu', 14: 'Cu-Co', 16: 'Cu-Mo-Au', 2: 'Au-Ag-Cu-Pb-Zn', 28: 'Ma', 31: 'Mo', 15: 'Cu-Fe-Ti-V', 7: 'Ba'}
 
 df = pd.read_csv("Datasets/Pre-Processed-Data.csv")
-scaler = MinMaxScaler()
-df = scaler.fit_transform(df)
-
-
-
 LE = LabelEncoder()
 df['METALLOGEN'] = LE.fit_transform(df['METALLOGEN'])
 df['LOCALITY'] = LE.fit_transform(df['LOCALITY'])
@@ -31,6 +26,12 @@ df['HOSTROCK_TYPE2'] = LE.fit_transform(df['HOSTROCK_TYPE2'])
 df['HOSTROCK_TYPE3'] = LE.fit_transform(df['HOSTROCK_TYPE3'])
 df['HOSTROCK_TYPE4'] = LE.fit_transform(df['HOSTROCK_TYPE4'])
 df['MINERAL_OR'] = LE.fit_transform(df['MINERAL_OR'])
+scaler = MinMaxScaler()
+df = scaler.fit_transform(df)
+
+
+
+
 
 my_list=['STRATABOUND','SEDIMENTARY','BEDDED','SHEAR','CONCORDANT','DISCORDANT','RESIDUAL','LENSOID','VEIN','REMOBILISED','MAGMATIC','QUARTZ','VOLCANO']
 #if not in my_list then belong to 'MORPH_OTHER'
