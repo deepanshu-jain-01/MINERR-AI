@@ -1,3 +1,4 @@
+from tkinter import Label
 from keras.models import load_model
 import streamlit as st
 import pandas as pd
@@ -30,11 +31,10 @@ df['HOSTROCK_TYPE3'] = LE.fit_transform(df['HOSTROCK_TYPE3'])
 df['HOSTROCK_TYPE4'] = LE.fit_transform(df['HOSTROCK_TYPE4'])
 df['MINERAL_OR'] = LE.fit_transform(df['MINERAL_OR'])
 
-ros=RandomOverSampler()
-X,Y=ros.fit_resample(df,df["MINERAL_OR"])
-
 scaler = MinMaxScaler()
-df = scaler.fit_transform(X)
+Y = df["MINERAL_OR"]
+df = df.drop("MINERAL_OR",axis=1)
+df = scaler.fit_transform(df)
 
 my_list=['STRATABOUND','SEDIMENTARY','BEDDED','SHEAR','CONCORDANT','DISCORDANT','RESIDUAL','LENSOID','VEIN','REMOBILISED','MAGMATIC','QUARTZ','VOLCANO']
 #if not in my_list then belong to 'MORPH_OTHER'
@@ -54,64 +54,66 @@ def filter(x):
     global MORPH_VOLCANIC
     global MORPH_OTHER
 
-    if my_list[0] in x:
+    if my_list[0] in x.upper():
         MORPH_STRATABOUND = 1
     else:
         MORPH_STRATABOUND = 0
-    if my_list[1] in x:
+    if my_list[1] in x.upper():
         MORPH_SEDIMENTARY = 1
     else:
         MORPH_SEDIMENTARY = 0
-    if my_list[2] in x:
+    if my_list[2] in x.upper():
         MORPH_BEDDED = 1
     else:
         MORPH_BEDDED = 0
-    if my_list[3] in x:
+    if my_list[3] in x.upper():
         MORPH_SHEAR = 1
     else:
         MORPH_SHEAR = 0
-    if my_list[4] in x:
+    if my_list[4] in x.upper():
         MORPH_CONCORDANT = 1
     else:
         MORPH_CONCORDANT = 0
-    if my_list[5] in x:
+    if my_list[5] in x.upper():
         MORPH_DISCORDANT = 1
     else:
         MORPH_DISCORDANT = 0
-    if my_list[6] in x:
+    if my_list[6] in x.upper():
         MORPH_LENSOID = 1
     else:
         MORPH_LENSOID = 0
-    if my_list[7] in x:
+    if my_list[7] in x.upper():
         MORPH_RESIDUAL = 1
     else:
         MORPH_RESIDUAL = 0
-    if my_list[8] in x:
+    if my_list[8] in x.upper():
         MORPH_VEIN = 1
     else:
         MORPH_VEIN = 0
-    if my_list[9] in x:
+    if my_list[9] in x.upper():
         MORPH_REMOBILISED = 1
     else:
         MORPH_REMOBILISED = 0
-    if my_list[10] in x:
+    if my_list[10] in x.upper():
         MORPH_MAGMATIC = 1
     else:
         MORPH_MAGMATIC = 0
-    if my_list[11] in x:
+    if my_list[11] in x.upper():
         MORPH_QUARTZ = 1
     else:
         MORPH_QUARTZ = 0
-    if my_list[12] in x:
+    if my_list[12] in x.upper():
         MORPH_VOLCANIC = 1
     else:
         MORPH_VOLCANIC = 0
-    for y in my_list:
-        if y in x:
-            MORPH_OTHER = 0
-            break
-        else:
-            MORPH_OTHER = 1
+    MORPH_OTHER = 0
+    if x != "":
+        for y in my_list:
+            if y in x.upper():
+                MORPH_OTHER = 0
+                break
+            else:
+                MORPH_OTHER = 1
 
     
 
@@ -189,11 +191,11 @@ def user_input_features():
     '73 G','73 J', '73 K'))
     #tenure = st.sidebar.selectbox('tenure', 0.0,72.0, 0.0)
     with st.sidebar:
-        HOSTROCK_TYPE1 = st.text_input('HOSTROCK_TYPE1')
-        HOSTROCK_TYPE2 = st.text_input('HOSTROCK_TYPE2')
-        HOSTROCK_TYPE3 = st.text_input('HOSTROCK_TYPE3')
-        HOSTROCK_TYPE4 = st.text_input('HOSTROCK_TYPE4')
-        MORPHOLOGY_TYPES = st.text_input("MORPHOLOGY_TYPES") 
+        HOSTROCK_TYPE1 = st.text_input('HOSTROCK_TYPE1').upper()
+        HOSTROCK_TYPE2 = st.text_input('HOSTROCK_TYPE2').upper()
+        HOSTROCK_TYPE3 = st.text_input('HOSTROCK_TYPE3').upper()
+        HOSTROCK_TYPE4 = st.text_input('HOSTROCK_TYPE4').upper()
+        MORPHOLOGY_TYPES = st.text_input("MORPHOLOGY_TYPES").upper()
     
 
 
@@ -216,11 +218,12 @@ def user_input_features():
             'MORPH-LENSOID':[MORPH_LENSOID],
             'MORPH-RESIDUAL':[MORPH_RESIDUAL],
             'MORPH-VEIN':[MORPH_VEIN],
+            'MORPH_REMOBILISED':[MORPH_REMOBILISED],
             'MORPH-MAGMATIC':[MORPH_MAGMATIC],
             'MORPH-QUARTZ':[MORPH_QUARTZ],
             'MORPH-VOLCANIC':[MORPH_VOLCANIC],
             'MORPH-OTHER':[MORPH_OTHER],           
-            }
+        }
 
 
     features = pd.DataFrame(data)
@@ -230,6 +233,15 @@ input_df = user_input_features()
 # df  - original data on which model is trained
 # input_df - data which we have taken (input)
 
+input_df['METALLOGEN'] = LE.transform(input_df['METALLOGEN'])
+input_df['LOCALITY'] = LE.transform(input_df['LOCALITY'])
+input_df['STATE'] =  LE.transform(input_df['STATE'])
+input_df['TOPOSHEET'] = LE.transform(input_df['TOPOSHEET'])
+input_df['HOSTROCK_TYPE1'] = LE.transform(input_df['HOSTROCK_TYPE1'])
+input_df['HOSTROCK_TYPE2'] = LE.transform(input_df['HOSTROCK_TYPE2'])
+input_df['HOSTROCK_TYPE3'] = LE.transform(input_df['HOSTROCK_TYPE3'])
+input_df['HOSTROCK_TYPE4'] = LE.transform(input_df['HOSTROCK_TYPE4'])
+#input_df['MINERAL_OR'] = LE.fit_transform(df['MINERAL_OR'])
 
 # Displays the user input features
 
@@ -240,15 +252,7 @@ st.subheader('User Input features')
 st.write(input_df)
 
 # transforming our features
-input_df['METALLOGEN'] = LE.transform(input_df['METALLOGEN'])
-input_df['LOCALITY'] = LE.transform(input_df['LOCALITY'])
-input_df['STATE'] =  LE.transform(input_df['STATE'])
-input_df['TOPOSHEET'] = LE.transform(input_df['TOPOSHEET'])
-input_df['HOSTROCK_TYPE1'] = LE.transform(input_df['HOSTROCK_TYPE1'])
-input_df['HOSTROCK_TYPE2'] = LE.transform(input_df['HOSTROCK_TYPE2'])
-input_df['HOSTROCK_TYPE3'] = LE.transform(input_df['HOSTROCK_TYPE3'])
-input_df['HOSTROCK_TYPE4'] = LE.transform(input_df['HOSTROCK_TYPE4'])
-#input_df['MINERAL_OR'] = LE.transform(input_df['MINERAL_OR'])
+input_df[['METALLOGEN','LOCALITY','STATE','TOPOSHEET','MINERAL_OR','HOSTROCK_TYPE1','HOSTROCK_TYPE2','HOSTROCK_TYPE3','HOSTROCK_TYPE4']] = LE.transform(input_df[['METALLOGEN','LOCALITY','STATE','TOPOSHEET','MINERAL_OR','HOSTROCK_TYPE1','HOSTROCK_TYPE2','HOSTROCK_TYPE3','HOSTROCK_TYPE4']])
 my_inputs = input_df.values
 my_inputs = scaler.transform(my_inputs)
 my_inputs=my_inputs.reshape(1,-1)
@@ -264,6 +268,3 @@ mineral_prob = prediction.max()
 
 st.subheader('Prediction')
 st.write(min_dict[mineral])
-
-st.subheader('Prediction Probability')
-st.write(mineral_prob)
