@@ -4,9 +4,6 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
-from imblearn.over_sampling import RandomOverSampler
-from imblearn.under_sampling import RandomUnderSampler
-from sklearn.model_selection import train_test_split
 
 
 classify_model   = load_model('Saved Models/classify-minerals.h5')
@@ -14,7 +11,7 @@ regression_model = load_model('Saved Models/calculate-mineral.h5')
 
 
 st.title('MINERR - AI')
-st.write("DESCRIPTION OF THE APP.........")
+st.write("Mineral exploration and mining are long, tedious, complex economic and scientific tasks. As the population is increasing exponentially, the demand for minerals that support the existence of individuals also increases. Therefore, mineral exploration needs to be faster and less expensive to increase the production of minerals.")
 
 my_list=['STRATABOUND','SEDIMENTARY','BEDDED','SHEAR','CONCORDANT','DISCORDANT','RESIDUAL','LENSOID','VEIN','REMOBILISED','MAGMATIC','QUARTZ','VOLCANO']
 #if not in my_list then belong to 'MORPH_OTHER'
@@ -189,8 +186,8 @@ def user_input_features():
             'HOSTROCK_TYPE2':[HOSTROCK_TYPE2],
             'HOSTROCK_TYPE3':[HOSTROCK_TYPE3],
             'HOSTROCK_TYPE4':[HOSTROCK_TYPE4],
-            'MORPH_STRATABOUND':[MORPH_STRATABOUND],
-            'MORPH_SEDIMENTARY':[MORPH_SEDIMENTARY],
+            'MORPH-STRATABOUND':[MORPH_STRATABOUND],
+            'MORPH-SEDIMENTARY':[MORPH_SEDIMENTARY],
             'MORPH-BEDDED':[MORPH_BEDDED],
             'MORPH-SHEAR':[MORPH_SHEAR],
             'MORPH-CONCORDANT':[MORPH_CONCORDANT],
@@ -198,7 +195,7 @@ def user_input_features():
             'MORPH-LENSOID':[MORPH_LENSOID],
             'MORPH-RESIDUAL':[MORPH_RESIDUAL],
             'MORPH-VEIN':[MORPH_VEIN],
-            'MORPH_REMOBILISED':[MORPH_REMOBILISED],
+            'MORPH-REMOBILISED':[MORPH_REMOBILISED],
             'MORPH-MAGMATIC':[MORPH_MAGMATIC],
             'MORPH-QUARTZ':[MORPH_QUARTZ],
             'MORPH-VOLCANIC':[MORPH_VOLCANIC],
@@ -206,21 +203,30 @@ def user_input_features():
         }
 
 
-    features = pd.DataFrame(data,columns = data.keys())
+    features = pd.DataFrame(data)
     return features
 
+
 input_df = user_input_features()
+input_df2 = input_df
+
+# Displays the user input features
+
+st.subheader('User Input features')
+
+#print(x_train.columns)
+
+st.write(input_df)
+
 # df  - original data on which model is trained
 # input_df - data which we have taken (input)
-
 
 #--------------------
 min_dict = {24: 'Fe-Hematite', 13: 'Cu', 1: 'Au', 0: 'Al-Bauxite', 36: 'Pb-Zn', 29: 'Mn', 30: 'Mn-Fe', 10: 'Cr', 27: 'Fe-Ti-V', 9: 'Be-Nb-Ta', 18: 'Cu-Pb', 23: 'Cu-Zn', 26: 'Fe-Magnetite', 40: 'WO3', 38: 'Pb-Zn-Cu', 37: 'Pb-Zn-Ag', 25: 'Fe-Hematite-Mn', 20: 'Cu-Pb-Zn', 6: 'Au-W', 3: 'Au-Cu', 35: 'Pb', 34: 'Nb-Ta-Li-Sn', 5: 'Au-Mo', 19: 'Cu-Pb-Ba', 12: 'Cs', 41: 'Zn', 4: 'Au-Cu-Zn', 21: 'Cu-Pb-Zn-Sb-Py', 8: 'Be', 11: 'Cr-PGE', 39: 'U', 33: 'Nb-Ta', 17: 'Cu-Ni', 32: 'Mo-U-Cu', 14: 'Cu-Co', 16: 'Cu-Mo-Au', 2: 'Au-Ag-Cu-Pb-Zn', 28: 'Ma', 31: 'Mo', 15: 'Cu-Fe-Ti-V', 7: 'Ba'}
 df = pd.read_csv("Datasets/Pre-Processed-Data.csv")
-df = df.reset_index(drop = True)
-
+df2 = df.copy()
 LE = LabelEncoder()
-
+df = pd.concat([df,input_df],axis=0)
 df['METALLOGEN'] = LE.fit_transform(df['METALLOGEN'])
 df['LOCALITY'] = LE.fit_transform(df['LOCALITY'])
 df['STATE'] =  LE.fit_transform(df['STATE'])
@@ -230,36 +236,22 @@ df['HOSTROCK_TYPE2'] = LE.fit_transform(df['HOSTROCK_TYPE2'])
 df['HOSTROCK_TYPE3'] = LE.fit_transform(df['HOSTROCK_TYPE3'])
 df['HOSTROCK_TYPE4'] = LE.fit_transform(df['HOSTROCK_TYPE4'])
 
-ros=RandomOverSampler()
-df,Y=ros.fit_resample(df,df["MINERAL_OR"])
-res_amt = df["RESERVE_AMT"]
 x = df.drop(["MINERAL_OR","RESERVE_AMT"],axis=1)
-y=df["MINERAL_OR"]
-x_train,x_test,y_train,y_test = train_test_split(x, y, test_size=0.25, random_state=42)
+x_train = x.head(len(df)-1)
+x_test = x.tail(1)
 
 
-x_test = pd.concat([input_df,x_test],axis=0)
-x_train = x_train.values
 x_test = x_test.values
+x_train = x_train.values
 
 x_test = x_test[0]
  
 
 scaler = MinMaxScaler()
 x_train = scaler.fit_transform(x_train)
-x_test = scaler.transform(x_test)
+input_df = scaler.transform(x_test.reshape(1,-1))
 
 #----------------------
-
-
-# Displays the user input features
-
-st.subheader('User Input features')
-
-#print(input_df.columns)
-
-st.write(input_df)
-
 
 
 # Apply model to make predictions
@@ -272,3 +264,45 @@ mineral_prob = prediction.max()
 
 st.subheader('Prediction')
 st.write(min_dict[mineral])
+#---------------------------------------end of classification model
+LE = LabelEncoder()
+input_df2['MINERAL_OR'] = min_dict[mineral]
+df2 = pd.concat([df2,input_df2],axis=0)
+df2['METALLOGEN'] = LE.fit_transform(df2['METALLOGEN'])
+df2['LOCALITY'] = LE.fit_transform(df2['LOCALITY'])
+df2['STATE'] =  LE.fit_transform(df2['STATE'])
+df2['TOPOSHEET'] = LE.fit_transform(df2['TOPOSHEET'])
+df2['HOSTROCK_TYPE1'] = LE.fit_transform(df2['HOSTROCK_TYPE1'])
+df2['HOSTROCK_TYPE2'] = LE.fit_transform(df2['HOSTROCK_TYPE2'])
+df2['HOSTROCK_TYPE3'] = LE.fit_transform(df2['HOSTROCK_TYPE3'])
+df2['HOSTROCK_TYPE4'] = LE.fit_transform(df2['HOSTROCK_TYPE4'])
+df2['MINERAL_OR'] = LE.fit_transform(df2['MINERAL_OR'])
+
+res_amt = df2["RESERVE_AMT"]
+x = df2.drop("RESERVE_AMT",axis=1)
+x_train = x.head(len(df2)-1)
+x_test = x.tail(1)
+
+
+x_test = x_test.values
+x_train = x_train.values
+
+x_test = x_test[0]
+ 
+
+scaler = MinMaxScaler()
+x_train = scaler.fit_transform(x_train)
+input_df = scaler.transform(x_test.reshape(1,-1))
+
+#----------------------
+
+
+#print(x_train.columns)
+# Apply model to make predictions
+pred = regression_model.predict(input_df)
+# mineral = key of the dictionary
+#prediction_proba = load_clf.predict_proba(df)
+
+
+st.subheader('Reserve Amount Prediction')
+st.write(pred)
