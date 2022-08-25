@@ -1,10 +1,12 @@
-from tkinter import Label
 from keras.models import load_model
 import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
+from imblearn.over_sampling import RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
+from sklearn.model_selection import train_test_split
 
 
 classify_model   = load_model('Saved Models/classify-minerals.h5')
@@ -216,15 +218,8 @@ input_df = user_input_features()
 min_dict = {24: 'Fe-Hematite', 13: 'Cu', 1: 'Au', 0: 'Al-Bauxite', 36: 'Pb-Zn', 29: 'Mn', 30: 'Mn-Fe', 10: 'Cr', 27: 'Fe-Ti-V', 9: 'Be-Nb-Ta', 18: 'Cu-Pb', 23: 'Cu-Zn', 26: 'Fe-Magnetite', 40: 'WO3', 38: 'Pb-Zn-Cu', 37: 'Pb-Zn-Ag', 25: 'Fe-Hematite-Mn', 20: 'Cu-Pb-Zn', 6: 'Au-W', 3: 'Au-Cu', 35: 'Pb', 34: 'Nb-Ta-Li-Sn', 5: 'Au-Mo', 19: 'Cu-Pb-Ba', 12: 'Cs', 41: 'Zn', 4: 'Au-Cu-Zn', 21: 'Cu-Pb-Zn-Sb-Py', 8: 'Be', 11: 'Cr-PGE', 39: 'U', 33: 'Nb-Ta', 17: 'Cu-Ni', 32: 'Mo-U-Cu', 14: 'Cu-Co', 16: 'Cu-Mo-Au', 2: 'Au-Ag-Cu-Pb-Zn', 28: 'Ma', 31: 'Mo', 15: 'Cu-Fe-Ti-V', 7: 'Ba'}
 df = pd.read_csv("Datasets/Pre-Processed-Data.csv")
 df = df.reset_index(drop = True)
-res_amt = df["RESERVE_AMT"]
-df = df.drop(["RESERVE_AMT","MINERAL_OR"],axis=1)
-
-df = pd.concat([df,input_df],axis=0)
 
 LE = LabelEncoder()
-
-input_df = df[-1]
-df = df[:-1] 
 
 df['METALLOGEN'] = LE.fit_transform(df['METALLOGEN'])
 df['LOCALITY'] = LE.fit_transform(df['LOCALITY'])
@@ -235,23 +230,24 @@ df['HOSTROCK_TYPE2'] = LE.fit_transform(df['HOSTROCK_TYPE2'])
 df['HOSTROCK_TYPE3'] = LE.fit_transform(df['HOSTROCK_TYPE3'])
 df['HOSTROCK_TYPE4'] = LE.fit_transform(df['HOSTROCK_TYPE4'])
 
-input_df['METALLOGEN'] = LE.transform(input_df['METALLOGEN'])
-input_df['LOCALITY'] = LE.transform(input_df['LOCALITY'])
-input_df['STATE'] =  LE.transform(input_df['STATE'])
-input_df['TOPOSHEET'] = LE.transform(input_df['TOPOSHEET'])
-input_df['HOSTROCK_TYPE1'] = LE.transform(input_df['HOSTROCK_TYPE1'])
-input_df['HOSTROCK_TYPE2'] = LE.transform(input_df['HOSTROCK_TYPE2'])
-input_df['HOSTROCK_TYPE3'] = LE.transform(input_df['HOSTROCK_TYPE3'])
-input_df['HOSTROCK_TYPE4'] = LE.transform(input_df['HOSTROCK_TYPE4'])
+ros=RandomOverSampler()
+df,Y=ros.fit_resample(df,df["MINERAL_OR"])
+res_amt = df["RESERVE_AMT"]
+x = df.drop(["MINERAL_OR","RESERVE_AMT"],axis=1)
+y=df["MINERAL_OR"]
+x_train,x_test,y_train,y_test = train_test_split(x, y, test_size=0.25, random_state=42)
 
 
-df = df.values
-input_df = input_df.values
+x_test = pd.concat([input_df,x_test],axis=0)
+x_train = x_train.values
+x_test = x_test.values
 
+x_test = x_test[0]
+ 
 
 scaler = MinMaxScaler()
-df = scaler.fit_transform(df)
-input_df = scaler.transform(input_df)
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
 
 #----------------------
 
@@ -265,12 +261,9 @@ st.subheader('User Input features')
 st.write(input_df)
 
 
-# transforming our features
-my_inputs=input_df.reshape(1,-1)
-
 
 # Apply model to make predictions
-prediction = classify_model.predict(my_inputs)
+prediction = classify_model.predict(input_df)
 # mineral = key of the dictionary
 mineral = prediction.argmax()
 #prediction_proba = load_clf.predict_proba(df)
