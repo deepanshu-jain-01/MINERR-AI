@@ -411,4 +411,4 @@ elif page == "Calculate Reserve":
 
 
     st.subheader('Reserve Amount Prediction (In Tonnes)')
-    st.write(pred.tolist())
+    st.write(pred[0][0])
