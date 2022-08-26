@@ -10,4 +10,4 @@ keras==2.9.0
 
 tensorflow-cpu==2.9.1
 
-imblear==0.9.1
+imblearn==0.9.1
