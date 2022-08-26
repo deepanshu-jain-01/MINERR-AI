@@ -93,6 +93,12 @@ df = pd.read_csv("Datasets/Pre-Processed-Data.csv")
 df2 = df.copy()
 
 def user_input_features():
+    st.write("""
+        input:focus{
+            width:20px;
+            outline :none;
+        }
+        """, unsafe_allow_html = True)
     METALLOGEN = st.sidebar.selectbox('METALLOGEN',('-', 'ADASH RAIMAL BELT', 'AGNIGUNDLA BELT', 'AHIRWALA-BALESWAR',
                 'AHIRWALA-BALESWAR BELT', 'AKOLA-WARI-BHIDER BELT','AKOLA-WARI-BHINDER BELT', 'ALADAHALLI BELT', 'ALWAR BELT',
                 'BABABUDAN BELT', 'BABABUDAN RANGE', 'BAILADILA BELT', 'BALAGHAT BELT', 'BALDA-DEWAKA BERA BELT',

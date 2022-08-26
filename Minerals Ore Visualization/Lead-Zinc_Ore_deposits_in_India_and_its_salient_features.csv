@@ -1,0 +1,32 @@
+﻿X,Y,objectid,metallogenesis,locality,statename,toposheet,latitude,longitude,commodity,hostrock,morphogenesis,formation,latdd,londd
+74.1333333299675,24.9500000001235,1,Rajpura-Dariba-Bethumni Belt,Dariba-Rajpura,Rajasthan,45 L,24 57-24 58N,74 08E,Lead-Zinc,Dolomite And Graphite Schist,Sheet Like/Lensoid Stratabound-Concordant,Bhilwara Sgp.,24.95,74.13333333
+74.1499999998092,25.0333333302569,2,Rajpura-Dariba-Bethumni Belt,Sindeswarkalan,Rajasthan,45 K,25 02N,74 09E,Lead-Zinc,Dolomite And Graphite Schist,Sheet Like/Lensoid Stratabound-Concordant,Bhilwara Sgp.,25.03333333,74.15
+83.9166666702401,22.0500000003428,3,Sargipalli Belt,Sargipalli,Orissa,64 N,22 03N,83 55E,Lead-Zinc,Garnetiferous Mica Schist,Stratabound-Remobilised,Gangpur Gp.,22.05,83.91666667
+75.3333333303993,25.7833333296241,4,Sawar Belt,Sawar,Rajasthan,45 O,25 47N,75 20E,Lead-Zinc,"Dolomite,Schist Quartzite",Stratabound-Concordant,Bhilwara Sgp.,25.78333333,75.33333333
+75.2333333302137,25.7666666700759,5,Sawar Belt,Tikhi,Rajasthan,45 O,25 46N,75 14E,Lead-Zinc,"Dolomite,Schist Quartzite",Stratabound-Concordant,Bhilwara Sgp.,25.76666667,75.23333333
+78.905555560004,14.7583333298306,6,Varikunta-Zangamarajupalle,Gollapalle,Andhra Pradesh,73 J,14 45 30 N,78 54 20 E,Lead-Zinc,"Dolomite,Slates,Cherts",Stratabound-Concordant,Cumbum Slates,14.75833333,78.90555556
+78.8833333302545,14.7666666697925,7,Varikunta-Zangamarazupalle,Zangamarazupalle,Andhra Pradesh,73 J,14 46 N,78 53 E,Lead-Zinc,Dolomite,Stratabound-Concordant,Cumbum,14.76666667,78.88333333
+73.733333330123,24.3500000002562,8,Zawar Belt,Balaria,Rajasthan,45 H,24 21N,73 44E,Lead-Zinc,Dolomite-Cherty Quartzite,Stratabound-Concordant,Udaipur Gp.,24.35,73.73333333
+73.7000000003211,24.3333333299668,9,Zawar Belt,Baroi Mogra,Rajasthan,45 H,24 20N,73 42E,Lead-Zinc,Dolomite,Stratabound-Concordant,Udaipur Gp.,24.33333333,73.7
+73.7000000003211,24.3500000002562,10,Zawar Belt,Mochia,Rajasthan,45 H,24 21-22N,73 42-43E,Lead-Zinc,Dolomite,Stratabound-Dissemination/Stringers,Udaipur Gp.,24.35,73.7
+73.6666666696207,24.266666670016,11,Zawar Belt,Paduna,Rajasthan,45 H,24 16N,73 40E,Lead-Zinc,"Dolomite,Cherty Quartzite",Stratabound-Dissemination/Stringers,Udaipur Gp.,24.26666667,73.66666667
+73.683333329581,24.3166666698801,12,Zawar Belt,Sonaria-Ruparia,Rajasthan,45 H,24 19-24 21N,73 41-73 44E,Lead-Zinc,Dolomite,Stratabound-Dissemination/Stringers,Udaipur Gp.,24.31666667,73.68333333
+73.683333329581,24.3166666698801,13,Zawar Belt,Zawarmala,Rajasthan,45 H,24 19N,73 41E,Lead-Zinc,"Dolomite,Quartzite,Conglomerate",Stratabound-Dissemination/Stringers,Udaipur Gp.,24.31666667,73.68333333
+74.1833333296112,34.1333333299568,14,Other,Buniyar,Jammu & Kashmir,43 J,34 08N,74 11E,Lead-Zinc,"Quartz Sericite Schist,Chlorite Schist",Stratabound-Discordant,Buniyar Fm..,34.13333333,74.18333333
+78.6666666699228,15.5000000002133,15,Chelima Belt,Chelima,Andhra Pradesh,57 I,15 30 N,78 40 E,Lead-Zinc,Brecciated Dolomite,Stratabound-Concordant,Bairankonda Quartzite (Cumbum Fm.),15.5,78.66666667
+88.6333333299454,26.9666666699613,16,Other,Garubathan,West Bengal,78 B,26 58-27 00N,88 38-88 45E,Lead-Zinc,"Quartz-Fe(Magnetite) Rock,Chlorite Schist",Stratabound-Concordant,Buxa Gp.,26.96666667,88.63333333
+74.8833333300128,33.1333333301574,17,Other,Sersandu,Jammu & Kashmir,43 K,33 08N,74 53E,Lead-Zinc,"Cherty Dolomite,Limestone",Stratabound-Sedimentary,Sirban Limestone Fm..,33.13333333,74.88333333
+92.2500000001843,27.1166666697173,18,Other,Shergaon,Arunachal Pradesh,83 A,27 07N,92 15E,Lead-Zinc,Dolomite,Stratabound-Concordant,Dedja Fm..,27.11666667,92.25
+79.6733333300148,16.391666669982,19,Agnigundla Belt,Karempudi,Andhra Pradesh,56 P,16 23 30 N,79 40 24 E,Lead-Zinc,Dolomite,Enechelon Lode-Stratabound-Sedimentary,Cumbum(Nallamalai),16.39166667,79.67333333
+74.6666666696812,26.5166666701826,20,Ghugra-Kayar Belt,Ghugra-Kayar,Rajasthan,45 J,26 31 26 32N,74 40-74 41E,Lead-Zinc,"Dolomite,Qtzt,Qtz-Bio Schist",Shms-Carbonate Hosted,Delhi Supergroup,26.51666667,74.66666667
+87.3000000004242,24.7166666700158,21,Hesathu-Belbathan Belt,Belbathan,Jharkhand,72 P,24 43N,87 18E,Lead-Zinc,Talc-Tremolite Schist,Discordant Veins,Enclaves In Chotanagpur Gneissic Complex,24.71666667,87.3
+86.0166666696483,23.9833333296182,22,Hesathu-Belbathan Belt,Hesatu,Jharkhand,73 I,23 59N,86 01E,Lead-Zinc,Talc-Tremolite Schist & Granulite,Discordant-Hydrothermal Veins,Enclaves In Chotanagpur Gneissic Complex,23.98333333,86.01666667
+74.6333333299978,25.4333333298855,23,Pur Banera Belt(Eastern Zone),Gaderiakhera,Rajasthan,45 K,25 26-25 28N,74 38-74 40E,Lead-Zinc,"Amphibolite,Calcschist,Fe(Magnetite) Rock",Stratabound-Dissemination,Bhilwara Sgp.,25.43333333,74.63333333
+74.3833333299826,25.1166666700277,24,Pur-Banera Belt,Kherji-Khera,Rajasthan,45 K,25 07N,74 23E,Lead-Zinc,"Dolomite,Schist And Quartzite",Stratabound-Concordant(Thin Bands),Bhilwara Sgp.,25.11666667,74.38333333
+74.6166666700375,25.4499999997532,25,Pur-Banera Belt,Malikhera,Rajasthan,45 K,25 27N,74 37E,Lead-Zinc,"Qtz.-Bio.-Mus.Schist,Amph.-Mag.Schist",Stratabound Concordant,Bhilwara Sgp.,25.45,74.61666667
+74.6333333299978,25.4499999997532,26,Pur-Banera Belt (Eastern Zone),Devpura-Banera,Rajasthan,45 K,25 27N,74 38E,Lead-Zinc,Schist And Amphibolite,Stratabound-Concordant,Bhilwara Sgp.,25.45,74.63333333
+74.6333333299978,25.4499999997532,27,Pur-Banera Belt(Eastern Zone),Devpura-Ranningpura,Rajasthan,45 K,25 27N,74 38E,Lead-Zinc,Quartz-Amphibole-Fe(Magnetite) Gneiss,Stratabound-Concordant,Bhilwara Sgp.,25.45,74.63333333
+74.6166666700375,25.4499999997532,28,Pur-Banera Belt(Eastern Zone),Malikhera,Rajasthan,45 K,25 27N,74 37E,Lead-Zinc,"Gar-Bio.Schist,Marble,Fe(Magnetite) Rock",Stratabound-Concordant,Bhilwara Sgp.,25.45,74.61666667
+74.533333329812,25.3166666696272,29,Pur-Banera Belt(Eastern Zone),Tiranga,Rajasthan,45 K,25 19N,74 32E,Lead-Zinc,Schist And Amphibolite,Stratabound-Concordant,Bhilwara Sgp.,25.31666667,74.53333333
+74.5499999996538,25.3499999997568,30,Pur-Banera Belt(Eastern Zone),Samodi,Rajasthan,45 K,25 21N,74 33E,Lead-Zinc,"Qtz.-Bio.Schist,Calc Schist,Fe(Magnetite)",Stratabound-Concordant,Bhilwara Sgp.,25.35,74.55
+74.1833333296112,25.066666669847,31,Rajpura-Dariba-Bethumni Belt,Bethumni,Rajasthan,45 K,25 04N,74 11E,Lead-Zinc,Dolomite,Sheet Like/Lensoid Stratabound-Concordant,Bhilwara Sgp.,25.06666667,74.18333333
